@@ -24,3 +24,34 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+import csv
+
+def pregunta_09():
+    ruta = "files/input/data.csv"
+    # Diccionario que almacena los registros
+    diccionario = {}
+    with open(ruta, 'r', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo, delimiter='\t')
+        for fila in lector_csv:
+            # Se toma una linea de la columna 5
+            chain= fila[4]
+            # Se divide la cadena, separa por comas
+            datos = chain.split(',')
+
+            #
+            # Se itera sobre cada uno de los datos separados
+            #
+            for dato in datos:
+                # Se separan en pares de clave valor
+                clave, valor = dato.split(':')
+
+                # Se inicia el conteo de cuantas veces aparece una clave
+                if clave not in diccionario:
+                    diccionario[clave] = 1
+                else:
+                    diccionario[clave] += 1
+        
+    sorted(diccionario)
+    return diccionario
+print(pregunta_09())
+

@@ -27,3 +27,35 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+import csv
+
+def pregunta_08():
+    ruta = "files/input/data.csv"
+    # Diccionario que almacena los registros
+    diccionario = {}
+    with open(ruta, 'r', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo, delimiter='\t')
+        for fila in lector_csv:
+            # Se toma una linea de la columna 5
+            numero= int(fila[1])
+            
+            # Si no esta en el diccionario, se crea
+            if numero not in diccionario:
+                diccionario[numero] = [fila[0]]
+            # Se añaden letras al diccionario en caso de que ya exista su clave
+            else:
+                # Se evaden los duplicados
+                if fila[0] not in diccionario[numero]:
+                    diccionario[numero].append(fila[0])
+                else:
+                    continue
+    
+    # Se ordenan las letras de cada numero correspondiente
+    for clave in diccionario:
+        diccionario[clave].sort()
+        
+    # Se ponen en formato de tupla  se ordena en base a su número(menor a mayor)
+    lista = [(clave, valor) for clave, valor in sorted(diccionario.items())]
+    
+    return lista
+print(pregunta_08())

@@ -26,3 +26,27 @@ def pregunta_04():
      ('12', 3)]
 
     """
+import csv
+
+def pregunta_04():
+    ruta = "files/input/data.csv"
+    # Diccionario que almacena los registros
+    diccionario = {}
+    with open(ruta, 'r', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo, delimiter='\t')
+        for fila in lector_csv:
+            # Obtiene la fecha y separa el mes
+            date = fila[2].split('-')
+            month = date[1]
+
+            if month in diccionario:
+                diccionario[month] += 1
+            else:
+                diccionario[month] = 1
+
+    # Se obtienen los objetos del dic, y se ordenan en base a su letra
+    lista = list(diccionario.items())
+    lista.sort()
+    
+    return lista
+print(pregunta_04())

@@ -20,3 +20,20 @@ def pregunta_10():
 
 
     """
+import csv
+
+def pregunta_10():
+    ruta = "files/input/data.csv"
+    listillas = []
+    # Diccionario que almacena los registros
+    with open(ruta, 'r', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo, delimiter='\t')
+        for fila in lector_csv:
+            # Se toma la letra, junto con las cantidades de datos de la columna 4 y 5
+            letter = fila[0]
+            ccol4 = len(fila[3].split(','))
+            ccol5 = len(fila[4].split(','))
+            listillas.append((letter, ccol4, ccol5))
+    
+    return listillas
+print(pregunta_10())

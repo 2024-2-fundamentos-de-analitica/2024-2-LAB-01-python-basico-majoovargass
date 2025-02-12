@@ -15,3 +15,31 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+import csv
+
+
+def pregunta_12():
+    ruta = "files/input/data.csv"
+    # Diccionario que almacena los registros
+    diccionario = {}
+    with open(ruta, 'r', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo, delimiter='\t')
+        for fila in lector_csv:
+            # Se toma la clave y los valores de cada fila
+            clave = fila[0]
+            # Se divide cada fragmento jjj:numero
+            auxiliar = fila[4].split(',')
+            # Se toma solo el numero de cada fragmento
+            values = [int(valor.split(':')[1]) for valor in auxiliar]
+            # Se suman los valores
+            sumas = sum(values)
+
+            #
+            # Si no esta en el diccionario, se agrega
+            if clave not in diccionario:
+                diccionario[clave] = sumas
+            else:
+                diccionario[clave] += sumas
+
+    return diccionario
+print(pregunta_12())

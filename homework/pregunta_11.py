@@ -16,3 +16,24 @@ def pregunta_11():
 
 
     """
+import csv
+
+def pregunta_11():
+    ruta = "files/input/data.csv"
+    # Diccionario que almacena los registros
+    diccionario = {}
+    with open(ruta, 'r', encoding='utf-8') as archivo:
+        lector_csv = csv.reader(archivo, delimiter='\t')
+        for fila in lector_csv:
+            # Obtenemos las letra de la columna 4, y se itera sobre ellos
+            lettercol4 = fila[3].split(',')
+
+            for letter in lettercol4:
+                # Si no exta en el diccionario, se agrega
+                if letter not in diccionario:
+                    diccionario[letter] = int(fila[1])
+                else:
+                    diccionario[letter] += int(fila[1])
+    
+    return diccionario
+print(pregunta_11())
